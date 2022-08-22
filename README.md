@@ -4,7 +4,7 @@
 刚开始starUML已经不能下载文件，今天重新试了。[下载地址](https://staruml.io/download/releases-v5/StarUML%20Setup%205.0.2.exe)
 代码中有两处需要修改:
 ## 1.表格标题变黑 
-tdhead=inverse  改为
+<thead class='thead-inverse'>  改为
 <thead class="thead-dark">
 ## 2.网页路径
 myproject 使用的是^$正则表达式，它将匹配空白路径，这是主页（此URL：**http://127.0.0.1:8000**）。
