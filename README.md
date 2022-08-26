@@ -24,3 +24,15 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('hello/', show_index),
 ]
+which is not very sustainable in the long run. It’s also a bad practice.
+Being in control is important because it let us write code with more confidence. 
+
+The reason why we used board.topics.all instead of just board.topics is because 
+board.topics is a Related Manager, which is pretty much similar to a Model Manager, 
+usually available on the board.objects property.
+
+Data validation should always be done on the server side, where we have full control over the data.
+
+As usual, we also implement several test cases. That’s how we develop with confidence.
+
+In the next tutorial, we are going to learn everything about authentication and how to protect our views and resources.
