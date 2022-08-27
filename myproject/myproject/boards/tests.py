@@ -119,7 +119,9 @@ class NewTopicTests(TestCase):
 
         url = reverse('new_topic', kwargs={'pk': 1})
         response = self.client.post(url, {})
+        form = response.context.get('form')
         self.assertEquals(response.status_code, 200)
+        self.assertTrue(form.errors)
 
     def test_new_topic_invalid_post_data_empty_field(self):
         """
