@@ -1,5 +1,4 @@
-# Python
-最良心的 Python 教程：
+# 最良心的 Python 教程推荐django教程Part 1 和Part2
 将Django的例子敲了一遍， 使用starUML将图画了一遍
 刚开始starUML已经不能下载文件，今天重新试了。[下载地址](https://staruml.io/download/releases-v5/StarUML%20Setup%205.0.2.exe)
 代码中有两处需要修改:
@@ -24,6 +23,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('hello/', show_index),
 ]
+```
+
+# Part 3
 which is not very sustainable in the long run. It’s also a bad practice.
 Being in control is important because it let us write code with more confidence. 
 
@@ -35,4 +37,26 @@ Data validation should always be done on the server side, where we have full con
 
 As usual, we also implement several test cases. That’s how we develop with confidence.
 
-In the next tutorial, we are going to learn everything about authentication and how to protect our views and resources.
+# Part 4
+In the next tutorial, we are going to learn everything about authentication and how to protect our views 
+and resources.[link](https://simpleisbetterthancomplex.com/series/2017/09/25/a-complete-beginners-guide-to-django-part-4.html)
+
+用django-admin startapp account报错,要用
+python django-admin.py startapp account
+
+
+```python
+self.assertContains(self.response, '<input', 5)
+```
+should be
+```python
+self.assertContains(self.response,'input', 5)
+```
+but we still have to test the form itself. Instead of just keep adding tests to the accounts/tests.py file,
+let’s improve the project design a little bit.
+
+we don’t need to be an expert in regular expressions. It’s just a matter of knowing the common ones.
+
+They make use of a view decorator named @login_required. This decorator prevents non-authorized users to access this page.
+
+The refresh_from_db() method make sure we have the latest state of the data.
