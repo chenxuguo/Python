@@ -50,7 +50,8 @@ class ReplyTopicTests(ReplyTopicTestCase):
 
     def test_form_inputs(self):
         """
-        The view must contain two inputs: csrf, message textarea
+
+        :return:
         """
         self.assertContains(self.response, '<input', 1)
         self.assertContains(self.response, '<textarea', 1)
@@ -60,11 +61,12 @@ class SuccessfulReplyTopicTests(ReplyTopicTestCase):
     def setUp(self):
         super().setUp()
         self.client.login(username=self.username, password=self.password)
-        self.response = self.client.post(self.url, {'message': 'hello, world!'})
+        self.response = self.client.post(self.url, {'message': 'hello,  world!'})
 
     def test_redirection(self):
         """
         A valid form submission should redirect the user
+        :return:
         """
         url = reverse('topic_posts', kwargs={'pk': self.board.pk, 'topic_pk': self.topic.pk})
         topic_posts_url = '{url}'.format(url=url)
@@ -73,8 +75,9 @@ class SuccessfulReplyTopicTests(ReplyTopicTestCase):
     def test_reply_created(self):
         """
         The total post count should be 2
-        The one created in the `ReplyTopicTestCase` setUp
+        The one created in the 'ReplyTopicTestCase' setUp
         and another created by the post data in this class
+        :return:
         """
         self.assertEquals(Post.objects.count(), 2)
 
@@ -82,7 +85,8 @@ class SuccessfulReplyTopicTests(ReplyTopicTestCase):
 class InvalidReplyTopicTests(ReplyTopicTestCase):
     def setUp(self):
         """
-        Submit an empty dictionary to the `reply_topic` view
+        Submit an empty dictionary to the 'reply_topic' view
+        :return:
         """
         super().setUp()
         self.client.login(username=self.username, password=self.password)
@@ -91,6 +95,7 @@ class InvalidReplyTopicTests(ReplyTopicTestCase):
     def test_status_code(self):
         """
         An invalid form submission should return to the same page
+        :return:
         """
         self.assertEquals(self.response.status_code, 200)
 

@@ -60,3 +60,6 @@ we don’t need to be an expert in regular expressions. It’s just a matter of 
 They make use of a view decorator named @login_required. This decorator prevents non-authorized users to access this page.
 
 The refresh_from_db() method make sure we have the latest state of the data.
+
+# Part5
+Here we have 11 posts. But not all of them belongs to the “Django” board.
