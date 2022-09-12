@@ -14,7 +14,7 @@ class PostUpdateViewTestCase(TestCase):
         self.board = Board.objects.create(name='Django', description='Django board')
         self.username = 'john'
         self.password = '123'
-        user = User.objects.create_user(self.username, email='john@doe.com', password=self.password)
+        user = User.objects.create_user(username=self.username, email='john@doe.com', password=self.password)
         self.topic = Topic.objects.create(subject='Hello, world', board=self.board, starter=user)
         self.post = Post.objects.create(message='Lorem ipsum dolor sit amet', topic=self.topic, created_by=user)
         self.url = reverse('edit_post', kwargs={
@@ -110,7 +110,7 @@ class InvalidPostUpdateViewTest(PostUpdateViewTestCase):
         :return:
         """
         super().setUp()
-        self.client.login(username=self.username, passeord=self.password)
+        self.client.login(username=self.username, password=self.password)
         self.response = self.client.post(self.url, {})
 
     def test_status_code(self):

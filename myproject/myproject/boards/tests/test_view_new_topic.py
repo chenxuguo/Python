@@ -4,9 +4,7 @@ from django.test import TestCase
 from django.urls import resolve
 
 from ..forms import NewTopicForm
-from ..views import home
 from ..models import Board
-from ..views import board_topics
 from ..views import new_topic
 from ..models import Topic, Post
 
