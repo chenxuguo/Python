@@ -4,7 +4,9 @@ from django.contrib.auth.models import User
 
 
 # Create your models here.
+from django.utils.safestring import mark_safe
 from django.utils.text import Truncator
+from markdown import markdown
 
 
 class Board(models.Model):
@@ -44,3 +46,5 @@ class Post(models.Model):
         truncated_message = Truncator(self.message)
         return truncated_message.chars(30)
 
+    def get_message_as_markdown(self):
+        return mark_safe(markdown(self.message, safe_mode='escape'))

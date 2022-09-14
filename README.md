@@ -111,5 +111,13 @@ python manage.py migrate
 ```
 
 # Part6
+CBVs are great to extend and reuse code.
+
  the handling of HTTP methods are done in separate methods, rather than using condi
  tional branching, and there are also the Generic Class-Based Views (GCBV).
+ 
+Just like we did with the form.html partial template, we can also create something 
+similar for the pagination HTML snippet.
+
+Maybe you have already noticed, but there’s a small issue when someone replies to a 
+post. It’s not updating the last_update field, so the ordering of the topics is broken right now.
