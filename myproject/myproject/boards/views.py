@@ -1,4 +1,5 @@
 # from django.shortcuts import render
+from django.urls import reverse
 from symbol import decorator
 
 from Tools.scripts.make_ctype import method
@@ -89,15 +90,21 @@ def new_topic(request, pk):
         form = NewTopicForm()
     return render(request, 'new_topic.html', {'board': board, 'form': form})
 
+
 class PostListView(ListView):
     model = Post
     context_object_name = 'posts'
     template_name = 'topic_posts.html'
-    paginate_by = 2
+    paginate_by = 20
 
     def get_context_data(self, **kwargs):
-        self.topic.views += 1
-        self.topic.save()
+
+        session_key = 'viewed_topic_{}'.format(self.topic.pk)   #
+        if not self.request.session.get(session_key, False):
+            self.topic.views += 1
+            self.topic.save()
+            self.request.session[session_key] = True
+
         kwargs['topic'] = self.topic
         return super().get_context_data(**kwargs)
 
@@ -124,7 +131,18 @@ def reply_topic(request, pk, topic_pk):
             post.topic = topic
             post.created_by = request.user
             post.save()
-            return redirect('topic_posts', pk=pk, topic_pk=topic_pk)
+
+            topic.last_updated = timezone.now()   # <- here
+            topic.save()    # <- and here
+
+            topic_url = reverse('topic_posts', kwargs={'pk': pk, 'topic_pk': topic_pk})
+            topic_posts_url = '{url}?page={page}#{id}'.format(
+                url=topic_url,
+                id=post.pk,
+                page=topic.get_page_count()
+            )
+            return redirect(topic_posts_url)
+            # return redirect('topic_posts', pk=pk, topic_pk=topic_pk)
     else:
         form = PostForm()
     return render(request, 'reply_topic.html', {'topic': topic, 'form': form})

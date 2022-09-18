@@ -52,6 +52,26 @@ Every Django model comes with a special attribute; we call it a Model Manager.
 You can access it via the Python attribute objects
 
 # Part 3
+
+This is our first form. It’s a ModelForm associated with the Topic model. 
+
+This is how we use the forms in a view.
+```python
+if request.method == 'POST':
+    form = NewTopicForm(request.POST)
+    if form.is_valid():
+        topic = form.save()
+        return redirect('board_topics', pk=board.pk)
+    else:
+        form = NewTopicForm()
+    return render(request, 'new_topic.html', {'form' : form})
+```
+When working with Bootstrap or any other Front-End library, I like to use a Django 
+package called django-widget-tweaks. It gives us more control over the rendering 
+process, keeping the defaults and just adding extra customizations on top of it.
+
+Now to implement the Bootstrap 4 validation tags, we can change the new_topic.html template
+
 which is not very sustainable in the long run. It’s also a bad practice.
 Being in control is important because it let us write code with more confidence. 
 
