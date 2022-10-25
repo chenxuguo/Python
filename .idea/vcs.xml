@@ -2,5 +2,10 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/DeepLearningPython" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/RealTime3DwithPython" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/a-sheep-assistant" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/geoviews" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/mnielsen-neural-networks-and-deep-learning" vcs="Git" />
   </component>
 </project>

@@ -1,10 +1,7 @@
 # 最良心的 Python 教程推荐django教程Part 1 和Part2
 
 ## 安装虚拟环境
-
-
 ```dos
-python --version   # make sure the version is 3.6, or modify environment bin to python36
 pip install virtualenv
 ```
 进入虚拟环境
@@ -144,4 +141,3 @@ similar for the pagination HTML snippet.
 
 Maybe you have already noticed, but there’s a small issue when someone replies to a 
 post. It’s not updating the last_update field, so the ordering of the topics is broken right now.
-
