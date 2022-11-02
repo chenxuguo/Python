@@ -11,7 +11,7 @@ class OutOfRangeError(ValueError):
     pass
 
 
-class NonIntegerError(ValueError):
+class NotIntegerError(ValueError):
     pass
 
 

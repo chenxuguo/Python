@@ -24,32 +24,27 @@ def with_timer(interval_or_callback):
         async def wrapper(*args, **kwargs):
             arguments = inspect.signature(func).bind(*args, **kwargs).arguments
             argument_string = ", ".join(f"{name} = {value!r}" for name, value in arguments.items())
+            timer_format = TIMER_FORMAT.format(module=func.__module__, name=func.__qualname__, arguments=argument_string)
+            if isinstance(interval_or_callback, float):
+                task = asyncio.create_task(print_with_timer(timer_format, interval_or_callback))
+            else:
+                task = asyncio.create_task(print_with_timer(timer_format))
+            try:
+                result = await func(*args, **kwargs)
+            finally:
+                task.cancel()
+            try:
+                await task
+            except asyncio.CancelledError:
+                pass
+            print()
+            return result
+        return wrapper
 
-    timer_format = TIMER_FORMAT.format(module=func.__module__, name=func.__qualname__, arguments=argument_string)
     if isinstance(interval_or_callback, float):
-        task = asyncio.create_task(print_with_timer(timer_format, interval_or_callback))
-    else
-        task = ayncio.create_task(print_with_timer(timer_format))
-    try:
-        result = await
-        func(*args, **kwargs)
-    finally:
-        task.cancel()
-    try:
-        await
-        task
-    except asyncio.CancelledError:
+        return inner
 
-
-pass
-print()
-return result
-return wrapper
-
-if isinstance(interval_or_callback, float)
-    return inner
-
-return inner(interval_or_callback)
+    return inner(interval_or_callback)
 
 
 @with_timer
@@ -59,9 +54,6 @@ async def do_stuff() -> int:
 
 
 @with_timer(0.5)
-
-:
-
 async def do_more_stuff(duration: float) -> str:
     await asyncio.sleep(duration)
     return "Do a good turn daily."
