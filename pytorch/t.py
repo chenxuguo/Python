@@ -9,7 +9,7 @@ class FooError(RuntimeError):
 
 class Ctx:
 	def __init__(self) -> None:
-		print('initialization')
+:		print('initialization')
 		
 	def __enter__(self) -> Tuple[int, int]:
 		print('before')
